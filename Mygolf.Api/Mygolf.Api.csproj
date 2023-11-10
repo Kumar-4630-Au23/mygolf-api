@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mygolf.Domain\Mygolf.Domain.csproj" />
+    <ProjectReference Include="..\Mygolf.Data\Mygolf.Data.csproj" />
   </ItemGroup>
 
 </Project>
