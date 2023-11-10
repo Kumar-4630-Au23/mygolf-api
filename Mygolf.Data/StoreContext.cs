@@ -10,5 +10,6 @@ public class StoreContext : DbContext
     { }
 
     public DbSet<Item> Items { get; set; }
+    
 }
 
