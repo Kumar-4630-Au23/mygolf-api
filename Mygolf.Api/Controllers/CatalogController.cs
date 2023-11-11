@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using Mygolf.Domain.Catalog;
+using Mygolf.Data;
 
 namespace Mygolf.Api.Controllers
 {
@@ -8,15 +9,23 @@ namespace Mygolf.Api.Controllers
     [Route("[controller]")]
     public class CatalogController : ControllerBase
     {
+        private readonly StoreContext _db;
+
+        public CatalogController(StoreContext db)
+        {
+            _db = db;
+        }
+
         [HttpGet]
         public IActionResult GetItems()
         {
-            var items = new List<Item>()
-            {
-                new Item("Shirt", "Ohio State Shirt", "Nike", 39.99m),
-                new Item("Shorts", "Ohio State shorts", "Nike", 49.99m)
-            };
-            return Ok(items);
+            return Ok(_db.Items);
+            // var items = new List<Item>()
+            // {
+            //     new Item("Shirt", "Ohio State Shirt", "Nike", 39.99m),
+            //     new Item("Shorts", "Ohio State shorts", "Nike", 49.99m)
+            // };
+            // return Ok(items);
 
         }
 
