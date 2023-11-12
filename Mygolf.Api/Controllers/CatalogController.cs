@@ -32,16 +32,20 @@ namespace Mygolf.Api.Controllers
         [HttpGet("{id:int}")]
         public IActionResult GetItems(int id)
         {
-            var item = new Item("Shirt", "Ohio State Shirt", "Nike", 39.99m);
-            item.Id = id;
-
+            var item = _db.Items.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
             return Ok(item);
         }
 
         [HttpPost]
         public IActionResult Post(Item item)
         {
-            return Created("/catalog/42", item);
+            _db.Add(item);
+            _db.SaveChanges();
+            return Created($"/catalog/{item.Id}", item);
         }
 
         [HttpPost("{id:int}/ratings")]
